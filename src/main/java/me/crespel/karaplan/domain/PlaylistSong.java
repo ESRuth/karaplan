@@ -62,6 +62,7 @@ public class PlaylistSong implements Comparable<PlaylistSong>, Serializable {
 	@CreatedBy
 	@ManyToOne
 	@JoinColumn(name = "FK_USER_CREATED", referencedColumnName = "ID")
+	@JsonIgnoreProperties({ "provider", "username", "firstName", "lastName", "fullName", "email", "locale", "votes", "comments", "playlists", "createdDate", "updatedDate" })
 	private User createdBy;
 
 	@LastModifiedDate
@@ -72,9 +73,10 @@ public class PlaylistSong implements Comparable<PlaylistSong>, Serializable {
 	@LastModifiedBy
 	@ManyToOne
 	@JoinColumn(name = "FK_USER_UPDATED", referencedColumnName = "ID")
+	@JsonIgnoreProperties({ "provider", "username", "firstName", "lastName", "fullName", "email", "locale", "votes", "comments", "playlists", "createdDate", "updatedDate" })
 	private User updatedBy;
 
-	@JsonIgnoreProperties("songs")
+	@JsonIgnoreProperties({ "accessKey", "songs", "comments", "createdDate", "createdBy", "updatedDate", "updatedBy" })
 	public Playlist getPlaylist() {
 		return key != null ? key.getPlaylist() : null;
 	}

@@ -24,6 +24,8 @@ export class SongActionsComponent implements OnInit, OnChanges {
   @Input() showComments: boolean = true;
   @Input() showPlaylists: boolean = true;
   @Input() showRemove: boolean = false;
+  @Input() loadingPosition: string = 'first';
+  @Input() class: string = '';
   @Output() voteAdded = new EventEmitter<SongVote>();
   @Output() voteRemoved = new EventEmitter<SongVote>();
   @Output() commentAdded = new EventEmitter<SongComment>();
@@ -174,7 +176,7 @@ export class SongActionsComponent implements OnInit, OnChanges {
 
   onPlaylistOpen() {
     if (this.playlists === undefined) {
-      this.playlistsService.getPlaylists(0, 100, 'name').subscribe(playlists => {
+      this.playlistsService.getPlaylists(0, 100, ['name']).subscribe(playlists => {
         this.updatePlaylists(playlists);
       });
     } else {
